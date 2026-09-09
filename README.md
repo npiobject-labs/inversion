@@ -1,4 +1,4 @@
-# DesdeMovil
+# inversion
 
 Plantilla del método "PC arranca, móvil continúa":
 
