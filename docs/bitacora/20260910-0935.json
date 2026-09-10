@@ -1,0 +1,34 @@
+{
+  "fecha": "2026-09-10T09:35:00+02:00",
+  "titulo": "Incorporar la bitácora del proyecto",
+  "objetivo": "Dejar el proyecto con una bitácora pública que se genere sola en cada publicación, y estrenarla con la entrada de esta misma sesión.",
+  "prompts": [
+    {
+      "texto": "Aplicar un parche preparado en otra sesión sobre main, hacer push, y verificar por la API de GitHub que el run de «Deploy docs to GitHub Pages» de ese SHA termina en verde y que el paso «Generar el índice de la bitácora» dice «0 entradas indexadas». Después cerrar la sesión: resumen de 5 líneas en docs/planificacion/sesiones/ y entrada nueva en docs/bitacora/AAAAMMDD-HHMM.json con el título «Incorporar la bitácora del proyecto», el SHA y el run del commit del parche. Push, verificar que Pages queda en verde, subir la copia a Drive y dar el SHA y la URL de bitacora.html.",
+      "nota": "Resumen, no transcripción: el original incluía una ruta local del PC del usuario y docs/ es público."
+    },
+    {
+      "texto": "Si git am falla por espacios, usa git apply --3way. Deben cambiar 8 ficheros, y docs/bitacora.html debe tener 264 líneas. En la entrada de bitácora, resume mi primer prompt: contenía una ruta de mi PC.",
+      "nota": "Acompañaba al parche completo, que se omite aquí por longitud."
+    }
+  ],
+  "cambios": [
+    "docs/bitacora.html: página nueva de 264 líneas que lee bitacora/index.json y pinta las sesiones en orden inverso, con buscador, botón de copiar cada prompt y tema claro/oscuro/automático.",
+    "docs/bitacora/README.md: formato de las entradas, tabla de campos y ejemplo completo.",
+    ".github/workflows/pages.yml: paso «Generar el índice de la bitácora» antes de publicar; valida cada JSON, exige fecha y titulo, y falla el run si alguna entrada está mal formada.",
+    ".gitignore: docs/bitacora/index.json queda fuera del repo porque lo genera el workflow.",
+    "CLAUDE.md: la bitácora entra en la tabla de URLs vivas, en el cierre de sesión y como regla BITACORA con los campos y el aviso de que docs/ es público.",
+    "ARRANQUE.md: sección «Trabajo diario: la bitácora» con el prompt de cierre.",
+    "docs/guiaNew.html y docs/guiaFable.html: el paso de cierre menciona la entrada de bitácora y enlaza la página."
+  ],
+  "sha": "77b7ae7",
+  "sha_completo": "77b7ae7a902aad66719cac8037bea421ef5b9081",
+  "run": "34450559904",
+  "fly": null,
+  "pendiente": [
+    "Enlazar la bitácora desde docs/index.html",
+    "Archivar el mock actual en docs/mocks/ cuando cambie de build"
+  ],
+  "enlaces": [],
+  "notas": "Primera entrada de la bitácora. El parche se aplicó con git am sin conflictos: 8 ficheros, 429 líneas añadidas y 3 borradas, y docs/bitacora.html con las 264 líneas esperadas. El paso de indexado se probó en local antes del push y el log del run 34450559904 confirma «Bitácora: 0 entradas indexadas», el estado correcto justo antes de que existiera esta entrada."
+}
