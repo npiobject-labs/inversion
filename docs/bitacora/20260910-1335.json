@@ -1,0 +1,32 @@
+{
+  "fecha": "2026-09-10T13:35:00+02:00",
+  "titulo": "Prueba hola mundo: Fly responde y Pages lo muestra",
+  "objetivo": "Estrenar el backend de Fly de punta a punta: una ruta que devuelve texto con CORS, una página de Pages que la consume y un paso de workflow que lo verifica en cada despliegue.",
+  "prompts": [
+    {
+      "texto": "Aplica este parche en main de npiobject-labs/inversion tal cual (git am), haz push a main y verifica por la API de Actions que los runs de deploy.yml y pages.yml para ese SHA terminan en success (deploy.yml incluye un paso nuevo que comprueba /holamundo y su cabecera CORS). Después cierra la sesión según CLAUDE.md (resumen en docs/planificacion/sesiones/ y entrada nueva en docs/bitacora/). Dame SHA, URL https://npiobject-labs.github.io/inversion/holamundo.html y build IN-B1-20260910-003.",
+      "nota": "El prompt traía adjunto el parche completo en formato git am; aquí solo se recoge la instrucción, no el cuerpo del parche."
+    }
+  ],
+  "cambios": [
+    "app/src/main.rs: ruta GET /holamundo que devuelve el texto «holamundo» con la cabecera Access-Control-Allow-Origin: *, para que Pages pueda llamarla desde otro origen.",
+    ".github/workflows/deploy.yml: paso «Verificar /holamundo» que comprueba cuerpo y cabecera CORS y falla el run si no cuadran, y línea nueva en el resumen del despliegue.",
+    "docs/holamundo.html: página que hace fetch a https://inversion-npiobject-labs.fly.dev/holamundo y pinta la respuesta o el error, con build IN-B1-20260910-003."
+  ],
+  "sha": "652ee06",
+  "sha_completo": "652ee06ffef23080cf41171a2378fb1819bda06c",
+  "run": "34471771025",
+  "mock": null,
+  "build": "IN-B1-20260910-003",
+  "pagina": "holamundo.html",
+  "fly": "https://inversion-npiobject-labs.fly.dev/salud",
+  "pendiente": [
+    "El mock principal (docs/index.html) no enlaza todavía a holamundo.html",
+    "La máquina de Fly se apaga sin tráfico: la primera carga de la página puede tardar unos segundos"
+  ],
+  "enlaces": [
+    { "texto": "Run de Fly 34471770931", "url": "https://github.com/npiobject-labs/inversion/actions/runs/34471770931" },
+    { "texto": "Run de Pages 34471771025", "url": "https://github.com/npiobject-labs/inversion/actions/runs/34471771025" }
+  ],
+  "notas": "El parche se aplicó tal cual, sin retoques; antes del push se comprobó en local que app/ compila con cargo check. Primer despliegue real de Fly en este proyecto: la app es inversion-npiobject-labs, calculada como <repo>-<owner>. El prompt del usuario se recoge sin el cuerpo del parche, que incluía una cabecera con correo personal."
+}
