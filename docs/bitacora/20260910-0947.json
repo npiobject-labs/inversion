@@ -1,0 +1,29 @@
+{
+  "fecha": "2026-09-10T09:47:00+02:00",
+  "titulo": "Enlazar la bitácora desde el mock",
+  "objetivo": "Hacer que la bitácora sea alcanzable desde la portada del proyecto y corregir el solape del botón Copiar en móvil.",
+  "prompts": [
+    {
+      "texto": "Dos retoques y cierre:\n1. En docs/index.html añade un enlace visible a bitacora.html (\"Bitácora del proyecto\"). Sube el número de build según CLAUDE.md.\n2. En docs/bitacora.html, el botón Copiar tapa el final de la primera línea de cada prompt en móvil: da al pre de .block un padding-right suficiente para el botón (unos 5.5rem). Es la única excepción autorizada a \"no tocar bitacora.html\".\nPush, verifica que Pages queda en verde, y cierra la sesión según CLAUDE.md con entrada de bitácora. Dime SHA, URL y build."
+    }
+  ],
+  "cambios": [
+    "docs/index.html: enlace «Bitácora del proyecto» bajo una regla horizontal, y build subido de IN-B1-20260905-001 a IN-B1-20260910-002.",
+    "docs/mocks/001-mock0.html: archivado el mock de fase 0, que nunca llegó a guardarse.",
+    "docs/mocks/002-bitacora.html: archivado el mock resultante de esta sesión.",
+    "docs/bitacora.html: el pre de .block reserva 5.5rem a la derecha para que el botón Copiar no solape el texto."
+  ],
+  "sha": "2e9a862",
+  "sha_completo": "2e9a862771376a570a18109dcd50d478efd99d01",
+  "run": "34451825192",
+  "mock": "mocks/002-bitacora.html",
+  "build": "IN-B1-20260910-002",
+  "pagina": "index.html",
+  "fly": null,
+  "pendiente": [
+    "El mock sigue siendo la pantalla de fase 0, sin contenido real de producto",
+    "app/ sin tocar: Fly nunca se ha desplegado en este proyecto"
+  ],
+  "enlaces": [],
+  "notas": "Tocar docs/bitacora.html va contra la regla BITACORA de CLAUDE.md; el usuario autorizó esta excepción de forma explícita y acotada al padding del botón Copiar. docs/mocks/ arranca aquí, así que guarda de golpe el mock anterior y el nuevo."
+}
