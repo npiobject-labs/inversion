@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="build" content="IN-B1-20260910-003">
+  <title>inversion · hola mundo</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 2rem; background: #fafafa; color: #1a1a1a; }
+    main { max-width: 40rem; margin: 0 auto; }
+    h1 { font-size: 1.5rem; margin: 0 0 .5rem; }
+    p { color: #555; line-height: 1.5; }
+    code { background: #eee; padding: .15rem .35rem; border-radius: 3px; }
+    a { color: #0b6e7a; text-underline-offset: 2px; }
+    #respuesta { font-size: 2.5rem; font-weight: 700; margin: 1.5rem 0; color: #0b6e7a; }
+    #respuesta.error { font-size: 1rem; font-weight: 400; color: #b00020; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>inversion · hola mundo</h1>
+    <p>Pages pide <code>/holamundo</code> al backend en Fly.io y muestra lo que devuelve.</p>
+    <div id="respuesta">Despertando el backend…</div>
+    <p>Backend: <a id="url" href="#"></a> · Build: <code>IN-B1-20260910-003</code></p>
+    <p><a href="./">Volver al mock</a></p>
+  </main>
+  <script>
+    const url = 'https://inversion-npiobject-labs.fly.dev/holamundo';
+    const caja = document.getElementById('respuesta');
+    const enlace = document.getElementById('url');
+    enlace.href = url; enlace.textContent = url;
+    // La máquina se apaga sola sin tráfico: el primer arranque puede tardar unos segundos.
+    fetch(url, { signal: AbortSignal.timeout(30000) })
+      .then(r => r.ok ? r.text() : Promise.reject(new Error('HTTP ' + r.status)))
+      .then(texto => { caja.textContent = texto; })
+      .catch(e => { caja.className = 'error'; caja.textContent = 'Error al llamar al backend: ' + e.message; });
+  </script>
+</body>
+</html>

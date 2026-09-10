@@ -1,10 +1,15 @@
-use axum::{routing::get, Json, Router};
+use axum::{http::header, response::IntoResponse, routing::get, Json, Router};
 use serde_json::{json, Value};
 
 const PUERTO: u16 = 8080;
 
 async fn raiz() -> &'static str {
     "inversion backend"
+}
+
+// Prueba "hola mundo" consumida desde Pages (otro origen): CORS abierto.
+async fn holamundo() -> impl IntoResponse {
+    ([(header::ACCESS_CONTROL_ALLOW_ORIGIN, "*")], "holamundo")
 }
 
 async fn salud() -> Json<Value> {
@@ -16,7 +21,8 @@ async fn salud() -> Json<Value> {
 async fn main() {
     let app = Router::new()
         .route("/", get(raiz))
-        .route("/salud", get(salud));
+        .route("/salud", get(salud))
+        .route("/holamundo", get(holamundo));
 
     let direccion = format!("0.0.0.0:{PUERTO}");
     let listener = tokio::net::TcpListener::bind(&direccion)
